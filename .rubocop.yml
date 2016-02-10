@@ -1,0 +1,20 @@
+AllCops:
+  Exclude:
+    - db/**/*
+    - bin/**/*
+    - config/**/*
+    - spec/spec_helper.rb
+    - spec/rails_helper.rb
+    - Gemfile
+    - Rakefile
+
+Rails:
+  Enabled: true
+
+Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 90
+  Exclude:
+    - spec/**/*
