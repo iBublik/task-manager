@@ -1,0 +1,21 @@
+section.panel.panel-default
+  .panel-heading= @task.name
+  table.table
+    tr
+      th.text-right= t '.table.identifier'
+      td= @task.id
+    tr
+      th.text-right= t '.table.created_at'
+      td= l @task.created_at, format: :long
+    - if current_user.admin?
+      tr
+        th.text-right= t '.table.user'
+        td= @task.user.email
+  .panel-body
+    = @task.description
+
+section.panel.panel-default
+  .panel-body
+    .pull-right
+      = link_to t('shared.back'), :back, class: 'btn btn-default'
+

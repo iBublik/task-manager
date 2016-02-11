@@ -4,6 +4,8 @@ nav.navbar.navbar-inverse.navbar-fixed-top
       = link_to t('.brand'), root_path, class: 'navbar-brand'
     #navbar.collapse.navbar-collapse
       ul.nav.navbar-nav
+        li class=('active' if controller_name == 'tasks')
+          = link_to t('.tasks'), tasks_path
       ul.nav.navbar-nav.navbar-right
         li.dropdown
           - if user_signed_in?

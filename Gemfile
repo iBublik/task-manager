@@ -86,3 +86,6 @@ gem 'mini_magick'
 # Pagination
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
+
+# Simplify CRUD controllers
+gem 'responders'

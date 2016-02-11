@@ -1,19 +1,39 @@
 section.panel.panel-default
   .panel-heading=t '.title'
-  table.table.striped
+  - if policy(Task).new?
+    .panel-body
+      = link_to t('shared.create'), new_task_path
+  table.table
     thead
       tr
         th=t '.table.identifier'
         th=t '.table.created_at'
         th=t '.table.name'
-        th=t '.table.user'
+        - if show_users
+          th=t '.table.user'
+        - if show_description
+          th=t '.table.description'
+        th
     tbody
       - tasks.each do |task|
         tr id=dom_id(task)
           td= task.id
           td= l task.created_at, format: :long
           td= task.name
-          td= task.user.email
+          - if show_users
+            td= task.user.email
+          - if show_description
+            td= truncate task.description
+          td
+            - if policy(task).show?
+              => link_to task_path(task) do
+                i.glyphicon.glyphicon-eye-open
+            - if policy(task).edit?
+              => link_to edit_task_path(task) do
+                i.glyphicon.glyphicon-pencil
+            - if policy(task).destroy?
+              = link_to task_path(task), method: :delete do
+                i.glyphicon.glyphicon-trash
 
   .panel-body
     .pull-right

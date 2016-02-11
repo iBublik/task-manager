@@ -4,5 +4,9 @@ Rails.application.routes.draw do
 
     get 'sign_in', to: 'sessions#new', as: :sign_in
     resource :session, only: [:create, :destroy]
+
+    scope module: :account do
+      resources :tasks
+    end
   end
 end

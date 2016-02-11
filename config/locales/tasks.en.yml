@@ -3,8 +3,18 @@ en:
     tasks:
       list:
         title: List of tasks
-        table:
+        table: &task_table
           identifier: Identifier
           created_at: Created at
           name: Name
           user: User
+          description: Description
+    account:
+      tasks:
+        show:
+          table:
+            <<: *task_table
+        new:
+          title: New task
+        edit:
+          title: Edit task
