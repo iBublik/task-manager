@@ -1,5 +1,7 @@
 # Test task for VoltMobi
 
+[![Build Status](https://travis-ci.org/iBublik/volt-mobi.svg?branch=master)](https://travis-ci.org/iBublik/volt-mobi)
+
 ## Project setup
 
 1. Copy config files:
