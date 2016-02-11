@@ -20,7 +20,8 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:name, :description, (:user_id if user.admin?)].compact
+    [:name, :description, (:user_id if user.admin?), :attachment,
+     :remove_attachment].compact
   end
 
   class Scope < Scope

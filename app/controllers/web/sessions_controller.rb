@@ -9,7 +9,7 @@ module Web
     def create
       if authentication_successfull?
         session[:user_id] = user.id
-        redirect_to root_path, notice: t('.success')
+        redirect_to tasks_path, notice: t('.success')
       else
         flash.now.alert = t('.fail')
         render :new

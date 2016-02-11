@@ -2,6 +2,10 @@
   - if current_user.admin?
     = f.association :user, label_method: :email, include_blank: false
   = f.input :name
+  = f.input :attachment,
+            hint: (link_to f.object.attachment.file.identifier, f.object.attachment_url, target: '_blank' if f.object.attachment?)
+  - if f.object.attachment?
+    = f.input :remove_attachment, as: :boolean
   = f.input :description, input_html: { rows: 10 }
 
   .form-group

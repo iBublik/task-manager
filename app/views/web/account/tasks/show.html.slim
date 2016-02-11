@@ -1,5 +1,13 @@
 section.panel.panel-default
-  .panel-heading= @task.name
+  .panel-heading
+    = @task.name
+    .pull-right
+      - if policy(@task).edit?
+        => link_to edit_task_path(@task) do
+          i.glyphicon.glyphicon-pencil
+      - if policy(@task).destroy?
+        = link_to task_path(@task), method: :delete, data: { confirm: t('shared.are_you_sure') } do
+          i.glyphicon.glyphicon-trash
   table.table
     tr
       th.text-right= t '.table.identifier'
@@ -15,7 +23,13 @@ section.panel.panel-default
         th.text-right= t '.table.user'
         td= @task.user.email
   .panel-body
-    = @task.description
+    p= @task.description
+
+    - if @task.attachment?
+      - if @task.image_attachment?
+        = image_tag @task.attachment.thumbnail
+      - else
+        = link_to @task.attachment.file.identifier, @task.attachment_url, target: '_blank'
 
 section.panel.panel-default
   .panel-body

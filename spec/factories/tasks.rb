@@ -14,5 +14,12 @@ FactoryGirl.define do
     factory :finished_task do
       state 'finished'
     end
+
+    factory :task_with_image do
+      attachment { File.new("#{Rails.root}/spec/fixtures/test.jpg") }
+    end
+    factory :task_with_attachment do
+      attachment { File.new("#{Rails.root}/spec/fixtures/examples.txt") }
+    end
   end
 end

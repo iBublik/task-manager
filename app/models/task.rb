@@ -3,6 +3,8 @@ class Task < ActiveRecord::Base
 
   mount_uploader :attachment, AttachmentUploader
 
+  IMAGE_FORMATS = /jpg|png|gif|jpeg/
+
   belongs_to :user, inverse_of: :tasks
 
   validates :user_id, :name, presence: true
@@ -24,5 +26,9 @@ class Task < ActiveRecord::Base
 
   def switch_state
     can_start? ? start! : finish!
+  end
+
+  def image_attachment?
+    attachment? && File.extname(attachment.file.identifier) =~ IMAGE_FORMATS
   end
 end

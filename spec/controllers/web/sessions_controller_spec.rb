@@ -10,7 +10,7 @@ RSpec.describe Web::SessionsController, type: :controller do
         request
       end
 
-      it 'redirects to root path' do
+      it 'redirects to tasks path' do
         expect(response).to redirect_to root_path
       end
 
@@ -19,7 +19,7 @@ RSpec.describe Web::SessionsController, type: :controller do
   end
 
   shared_examples_for 'succefull action' do
-    it { is_expected.to redirect_to root_path }
+    it { is_expected.to redirect_to tasks_path }
 
     it { is_expected.to set_flash[:notice].to(success_message) }
   end
@@ -73,14 +73,16 @@ RSpec.describe Web::SessionsController, type: :controller do
 
   describe 'DELETE #destroy' do
     context 'with signed in user' do
+      let(:success_message) { t('web.sessions.destroy.success') }
+
       before do
         sign_in
         delete :destroy
       end
 
-      it_behaves_like 'succefull action' do
-        let(:success_message) { t('web.sessions.destroy.success') }
-      end
+      it { is_expected.to redirect_to root_path }
+
+      it { is_expected.to set_flash[:notice].to(success_message) }
 
       it 'removes user id fron session' do
         expect(session[:user_id]).to be_nil
