@@ -1,0 +1,10 @@
+en:
+  layouts:
+    application:
+      title: TaskTracker
+
+  application:
+    navigation:
+      brand: TaskTracker
+      sign_in: Sign in
+      sign_out: Sign out

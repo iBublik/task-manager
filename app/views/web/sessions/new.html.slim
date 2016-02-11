@@ -1,0 +1,10 @@
+section.panel.panel-default.clerfix
+  .panel-body
+    = simple_form_for :session, url: session_path, html: { class: 'form-horizontal' } do |f|
+      = f.input :email
+      = f.input :password
+
+      .form-group
+        .col-lg-9.col-lg-offset-3
+          .pull-right
+            => f.button :submit, t('.sign_in'), class: 'btn-primary'

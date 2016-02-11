@@ -1,0 +1,13 @@
+en:
+  web:
+    sessions:
+      need_to_sign_in: You need to sign in to perform this action
+      already_signed_in: You're already signed in
+      not_signed_in: You're not signed in
+      new:
+        sign_in: Sign in
+      create:
+        success: You're successfully signed in
+        fail: Invalid e-mail or password
+      destroy:
+        success: You're successfully signed out

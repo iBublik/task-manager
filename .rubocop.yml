@@ -18,3 +18,7 @@ Metrics/LineLength:
   Max: 90
   Exclude:
     - spec/**/*
+
+Metrics/MethodLength:
+  Exclude:
+    - spec/**/*

@@ -36,6 +36,13 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  # Shorter FactoryGirl syntax
+  config.include FactoryGirl::Syntax::Methods
+  # Shorter I18n syntax
+  config.include ActionView::Helpers::TranslationHelper
+
+  config.include ControllerHelpers, type: :controller
+
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.

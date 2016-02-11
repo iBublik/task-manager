@@ -1,0 +1,8 @@
+section.falsh
+  - if flash.present?
+    - flash.each do |kind, messages|
+      - [messages].flatten.each do |msg|
+        .alert class="alert-#{kind.to_s == 'notice' ? 'success' : 'danger'}"
+          button.close type='button' data-dismiss='alert'
+            span &times;
+          = msg
