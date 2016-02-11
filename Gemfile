@@ -31,6 +31,7 @@ end
 group :test do
   gem 'shoulda-matchers', '~> 3.0'
   gem 'rspec-its'
+  gem 'simplecov', require: false
 end
 
 group :development, :test do

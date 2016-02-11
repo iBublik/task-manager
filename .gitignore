@@ -18,6 +18,7 @@ public/uploads
 .floo
 .flooignore
 .byebug_history
+coverage/
 
 # Ignore IDE files
 .idea/
