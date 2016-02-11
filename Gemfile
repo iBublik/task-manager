@@ -37,6 +37,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution
   # and get a debugger console
   gem 'byebug'
+
+  # Generating test data
+  gem 'faker'
 end
 
 group :development do
@@ -75,3 +78,11 @@ gem 'rails-i18n' # Global localization rules
 
 # Form helpers
 gem 'simple_form'
+
+# File upload
+gem 'carrierwave'
+gem 'mini_magick'
+
+# Pagination
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'

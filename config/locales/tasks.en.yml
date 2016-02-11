@@ -1,0 +1,10 @@
+en:
+  web:
+    tasks:
+      list:
+        title: List of tasks
+        table:
+          identifier: Identifier
+          created_at: Created at
+          name: Name
+          user: User

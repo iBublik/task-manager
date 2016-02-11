@@ -4,4 +4,6 @@ class User < ActiveRecord::Base
   enum role: %i(user admin)
 
   validates :email, presence: true, uniqueness: true
+
+  has_many :tasks, inverse_of: :user, dependent: :destroy
 end

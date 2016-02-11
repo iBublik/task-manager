@@ -1,0 +1,20 @@
+section.panel.panel-default
+  .panel-heading=t '.title'
+  table.table.striped
+    thead
+      tr
+        th=t '.table.identifier'
+        th=t '.table.created_at'
+        th=t '.table.name'
+        th=t '.table.user'
+    tbody
+      - tasks.each do |task|
+        tr id=dom_id(task)
+          td= task.id
+          td= l task.created_at, format: :long
+          td= task.name
+          td= task.user.email
+
+  .panel-body
+    .pull-right
+      = paginate tasks, theme: 'twitter-bootstrap-3'

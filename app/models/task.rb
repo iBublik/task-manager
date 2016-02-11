@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  mount_uploader :attachments, AttachmentUploader
+  mount_uploader :attachment, AttachmentUploader
 
   belongs_to :user, inverse_of: :tasks
 
