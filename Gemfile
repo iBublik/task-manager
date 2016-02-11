@@ -89,3 +89,6 @@ gem 'bootstrap-kaminari-views'
 
 # Simplify CRUD controllers
 gem 'responders'
+
+# State machine
+gem 'workflow'

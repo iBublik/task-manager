@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
 
     scope module: :account do
-      resources :tasks
+      resources :tasks do
+        patch :switch_state, on: :member, defaults: { format: :json }
+      end
     end
   end
 end

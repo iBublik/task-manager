@@ -7,6 +7,9 @@ section.panel.panel-default
     tr
       th.text-right= t '.table.created_at'
       td= l @task.created_at, format: :long
+    tr
+      th.text-right= t '.table.state'
+      td=t "tasks.states.#{@task.current_state.name}.name"
     - if current_user.admin?
       tr
         th.text-right= t '.table.user'

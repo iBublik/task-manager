@@ -93,6 +93,10 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         get :new
       end
 
+      it 'sets new task' do
+        expect(assigns(:task)).to be_a_new(Task)
+      end
+
       it { is_expected.to render_template :new }
     end
   end
@@ -332,6 +336,79 @@ RSpec.describe Web::Account::TasksController, type: :controller do
           before { request }
 
           it_behaves_like 'authorizable'
+        end
+      end
+    end
+  end
+
+  describe 'PATCH #switch_state' do
+    let(:task_owner) { create(:user) }
+    let(:task) { create(:new_task, user: task_owner) }
+
+    let(:request) { patch :switch_state, id: task.id, format: :json }
+
+    context 'by not authenticated user' do
+      let(:not_authenticated_message) { t('web.sessions.not_authenticated') }
+
+      before { request }
+
+      it { is_expected.to respond_with :unauthorized }
+    end
+
+    context 'by authenticated user' do
+      before { sign_in tested_user }
+
+      context 'by admin' do
+        let(:tested_user) { create(:admin) }
+
+        it 'switches state of task to `started`' do
+          expect { request }
+            .to change(task_owner.tasks.with_started_state, :count).by(1)
+        end
+      end
+
+      context 'by not admin' do
+        shared_examples_for 'forbidden' do
+          it 'returns `forbidden` status' do
+            request
+            is_expected.to respond_with :forbidden
+          end
+        end
+
+        context 'by owner of task' do
+          let(:tested_user) { task_owner }
+
+          context 'with new task' do
+            it 'switches state of task to `started`' do
+              expect { request }
+                .to change(task_owner.tasks.with_started_state, :count).by(1)
+            end
+          end
+
+          context 'with started task' do
+            let(:task) { create(:started_task, user: task_owner) }
+
+            it 'switches state of task to `finished`' do
+              expect { request }
+                .to change(task_owner.tasks.with_finished_state, :count).by(1)
+            end
+          end
+
+          context 'with finished task' do
+            let(:task) { create(:finished_task, user: task_owner) }
+
+            it_behaves_like 'forbidden'
+
+            it "doesn't change task state" do
+              expect { request }.not_to change { task.reload.current_state }
+            end
+          end
+        end
+
+        context 'by not owner of task' do
+          let(:tested_user) { create(:user) }
+
+          it_behaves_like 'forbidden'
         end
       end
     end

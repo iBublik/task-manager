@@ -15,6 +15,10 @@ class TaskPolicy < ApplicationPolicy
     admin_or_owner?
   end
 
+  def switch_state?
+    !record.final_state? && admin_or_owner?
+  end
+
   def permitted_attributes
     [:name, :description, (:user_id if user.admin?)].compact
   end

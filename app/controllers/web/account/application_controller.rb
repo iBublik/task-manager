@@ -11,7 +11,11 @@ module Web
       private
 
       def user_not_authorized
-        redirect_to root_path, alert: t('web.sessions.not_authorized')
+        error = t('web.sessions.not_authorized')
+        respond_to do |format|
+          format.html { redirect_to root_path, alert: error }
+          format.json { render json: { error: error }, status: :forbidden }
+        end
       end
     end
   end

@@ -11,8 +11,9 @@ section.panel.panel-default
         th=t '.table.name'
         - if show_users
           th=t '.table.user'
-        - if show_description
+        - if show_additional_info
           th=t '.table.description'
+          th=t '.table.state'
         th
     tbody
       - tasks.each do |task|
@@ -22,8 +23,14 @@ section.panel.panel-default
           td= task.name
           - if show_users
             td= task.user.email
-          - if show_description
+          - if show_additional_info
             td= truncate task.description
+            td.state-data
+              span.current-state=t "tasks.states.#{task.current_state.name}.name"
+              - if policy(task).switch_state?
+                =< link_to t("tasks.states.#{task.current_state.name}.switch"),
+                           switch_state_task_path(task), remote: true, method: :patch,
+                           class: 'switch-state'
           td
             - if policy(task).show?
               => link_to task_path(task) do
@@ -32,7 +39,7 @@ section.panel.panel-default
               => link_to edit_task_path(task) do
                 i.glyphicon.glyphicon-pencil
             - if policy(task).destroy?
-              = link_to task_path(task), method: :delete do
+              = link_to task_path(task), method: :delete, data: { confirm: t('shared.are_you_sure') } do
                 i.glyphicon.glyphicon-trash
 
   .panel-body

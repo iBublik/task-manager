@@ -21,7 +21,11 @@ module Web
 
     def authenticate_user
       return if user_signed_in?
-      redirect_to sign_in_path, alert: t('web.sessions.not_authenticated')
+      error = t('web.sessions.not_authenticated')
+      respond_to do |format|
+        format.html { redirect_to sign_in_path, alert: error }
+        format.json { render json: { error: error }, status: :unauthorized }
+      end
     end
   end
 end

@@ -9,6 +9,7 @@ en:
           name: Name
           user: User
           description: Description
+          state: State
     account:
       tasks:
         show:
@@ -18,3 +19,14 @@ en:
           title: New task
         edit:
           title: Edit task
+
+  tasks:
+    states:
+      new:
+        name: New
+        switch: Switch to started
+      started:
+        name: Started
+        switch: Switch to finished
+      finished:
+        name: Finished
